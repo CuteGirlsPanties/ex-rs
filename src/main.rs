@@ -1,4 +1,6 @@
 fn main() {
+    println!("Hi, Release!");
+
     #[cfg(target_os = "linux")]
     print!("Hello, Linux ");
     #[cfg(target_os = "macos")]
