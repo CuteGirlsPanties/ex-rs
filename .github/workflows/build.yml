@@ -37,13 +37,13 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-            art: ls target/release
+            art: target/release/ex-rs
           - os: macos-13
-            art: ls target/release
+            art: target/release/ex-rs
           - os: macos-14
-            art: ls target/release
+            art: target/release/ex-rs
           - os: windows-2022
-            art: dir target/release
+            art: target/release/ex-rs.exe
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
