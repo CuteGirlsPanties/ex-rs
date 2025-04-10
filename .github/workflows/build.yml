@@ -1,0 +1,11 @@
+name: Build and release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      run: cargo build --release
