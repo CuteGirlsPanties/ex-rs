@@ -37,16 +37,20 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-            art: target/release/ex-rs
+            art-name: ex_linux-x86_64
+            art-path: target/release/ex-rs
           - os: macos-13
-            art: target/release/ex-rs
+            art-name: ex_macos-x86_64
+            art-path: target/release/ex-rs
           - os: macos-14
-            art: target/release/ex-rs
+            art-name: ex_macos-aarch64
+            art-path: target/release/ex-rs
           - os: windows-2022
-            art: target/release/ex-rs.exe
+            art-name: ex_windows-x86_64
+            art-path: target/release/ex-rs.exe
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - run: |
           cargo build --release
-          ${{ matrix.art }}
+          ${{ matrix.art-path }}
