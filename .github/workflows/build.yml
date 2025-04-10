@@ -2,9 +2,8 @@ name: Build and release
 
 on:
   push:
-    branches: [main]
-  release:
-    types: [created]
+    tags:
+      - "v*.*.*"
 
 jobs:
   build:
@@ -33,10 +32,25 @@ jobs:
           path: ${{ matrix.art-path }}
   release:
     needs: build
-    strategy:
-      matrix:
-        os: [ex_linux-x86_64, ex_macos-x86_64, ex_macos-aarch64, ex_windows-x86_64]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/download-artifact@v4
-      - run: echo "${{ matrix.os }}"
+        with:
+          name: ex_linux-x86_64
+      - uses: actions/download-artifact@v4
+        with:
+          name: ex_macos-x86_64
+      - uses: actions/download-artifact@v4
+        with:
+          name: ex_macos-aarch64
+      - uses: actions/download-artifact@v4
+        with:
+          name: ex_windows-x86_64
+      - uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: |
+            ex_linux-x86_64
+            ex_macos-x86_64
+            ex_macos-aarch64
+            ex_windows-x86_64
