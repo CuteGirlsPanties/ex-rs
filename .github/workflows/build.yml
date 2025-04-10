@@ -1,11 +1,17 @@
 name: Build and release
 
 on:
+  push:
+    branches: [main]
   release:
     types: [created]
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, macos-13, macos-14, windows-2022]
+    runs-on: ${{ matrix.os }}
     steps:
+      - uses: actions/checkout@v4
       - run: cargo build --release
