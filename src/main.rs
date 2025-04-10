@@ -1,5 +1,5 @@
 fn main() {
-    println!("Hi, Release!");
+    println!("Hi, Release N5!");
 
     #[cfg(target_os = "linux")]
     print!("Hello, Linux ");
