@@ -29,8 +29,8 @@ jobs:
       - run: cargo build --release
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ art-name }}
-          path: ${{ art-path }}
+          name: ${{ matrix.art-name }}
+          path: ${{ matrix.art-path }}
   release:
     needs: build
     strategy:
