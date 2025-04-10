@@ -7,11 +7,46 @@ on:
     types: [created]
 
 jobs:
-  release:
+  # build:
+  #   strategy:
+  #     matrix:
+  #       include:
+  #         - os: ubuntu-22.04
+  #           art: ex_linux-amd64
+  #         - os: macos-13
+  #           art: ex_macos-amd64
+  #         - os: macos-14
+  #           art: ex_macos-arm64
+  #         - os: windows-2022
+  #           art: ex_windows-amd64
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - run: cargo build --release
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: Art
+  #         path: target/release/ex-rs(.exe)?
+  
+  # release:
+  #   runs-on: ubintu-22.04
+  #   steps:
+
+  xxx:
     strategy:
       matrix:
-        os: [ubuntu-22.04, macos-13, macos-14, windows-2022]
+        include:
+          - os: ubuntu-22.04
+            art: ls target/release
+          - os: macos-13
+            art: ls target/release
+          - os: macos-14
+            art: ls target/release
+          - os: windows-2022
+            art: dir target/release
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - run: cargo build --release
+      - run: |
+          cargo build --release
+          ${{ matrix.art }}
